@@ -1,8 +1,11 @@
 package base;
 
-import Utilities.BrowserUtils;
-import Utilities.ConfigurationReader;
-import Utilities.Driver;
+import org.openqa.selenium.interactions.Actions;
+import pages.LoginPage;
+import pages.TestsPage;
+import utilities.BrowserUtils;
+import utilities.ConfigurationReader;
+import utilities.Driver;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
@@ -11,6 +14,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+
 import java.io.IOException;
 
 public abstract class TestBase {
@@ -20,11 +24,13 @@ public abstract class TestBase {
     protected ExtentReports report;
     private ExtentHtmlReporter htmlReporter;
     protected ExtentTest test;
+    protected LoginPage loginPage;
+    protected TestsPage testsPage;
 
     @BeforeSuite
-    public void setUpSuite(){
+    public void setUpSuite() {
         report = new ExtentReports();
-        String path = System.getProperty("user.dir")+"/test-output/report.html";
+        String path = System.getProperty("user.dir") + "/test-output/report.html";
         htmlReporter = new ExtentHtmlReporter(path);
         htmlReporter.config().setReportName("Bitrix24 Automated Tests");
 
@@ -35,18 +41,21 @@ public abstract class TestBase {
     }
 
     @AfterSuite
-    public void tearDownSuite(){
+    public void tearDownSuite() {
         report.flush();
     }
+
     @Parameters("url")
     @BeforeMethod
     public void setUpMethod(@Optional String url) {
+        loginPage = new LoginPage();
+        testsPage = new TestsPage();
         driver = Driver.getDriver();
         wait = new WebDriverWait(driver, 10);
         softAssert = new SoftAssert();
-        if (url==null){
+        if (url == null) {
             driver.get(ConfigurationReader.getProperty("url"));
-        }else{
+        } else {
             driver.get(url);
         }
         driver.get(ConfigurationReader.getProperty("url"));
@@ -68,7 +77,7 @@ public abstract class TestBase {
         }
 
 
-//        Thread.sleep(3000);
+        Thread.sleep(3000);
         Driver.closeDriver();
         softAssert.assertAll();
     }
