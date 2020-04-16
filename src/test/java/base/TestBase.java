@@ -1,5 +1,6 @@
 package base;
 
+import POM.LoginPage;
 import Utilities.BrowserUtils;
 import Utilities.ConfigurationReader;
 import Utilities.Driver;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public abstract class TestBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
+    protected LoginPage loginPage;
     protected SoftAssert softAssert;
     protected ExtentReports report;
     private ExtentHtmlReporter htmlReporter;
@@ -69,7 +71,7 @@ public abstract class TestBase {
 
 
 //        Thread.sleep(3000);
-        Driver.closeDriver();
+    //    Driver.closeDriver();
         softAssert.assertAll();
     }
 
