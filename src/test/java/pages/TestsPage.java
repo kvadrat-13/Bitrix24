@@ -5,6 +5,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
 
+import java.util.List;
+
+
 public class TestsPage {
     public TestsPage() {
         PageFactory.initElements(Driver.getDriver(), this);
@@ -105,6 +108,64 @@ public class TestsPage {
     /**
      * Below, I will locate all elements for AC #4
      */
+
+    @FindBy(xpath = "//span[@class='bxhtmled-top-bar-btn bxhtmled-button-video']/i")
+    public WebElement insertVideo;
+
+    @FindBy(xpath = "(//td[@class='bxhtmled-right-c'])[1]/input")
+    public WebElement inputVideoBox;
+
+    @FindBy(id = "video_idPostFormLHE_blogPostForm-title")
+    public WebElement videoTitle;
+
+    @FindBy(xpath = "//input[@id='undefined']")
+    public WebElement saveBttn;
+
+    /**
+     * Below, I will locate all elements for AC #5
+     */
+
+    @FindBy(xpath = "//span[@title='Quote text']/i")
+    public WebElement quoteText;
+
+    // Iframe
+    @FindBy(xpath = "//iframe[@class='bx-editor-iframe']")
+    public WebElement iFrame;
+
+    @FindBy(xpath = "//blockquote[@class='bxhtmled-quote']/br")
+    public WebElement inputQuoteText;
+
+    @FindBy(id = "blog-submit-button-save")
+    public WebElement submitBttn5;
+
+    /**
+     * Below, I will locate all elements for AC #6
+     */
+
+    @FindBy(id = "bx-b-mention-blogPostForm")
+    public WebElement addMention;
+
+    // Here I am only locating contact, that contains number '11'
+    @FindBy(xpath = "//div[@class='bx-finder-box-item-t7-name'][contains(text(),'11')]")
+    public WebElement contact11;
+
+    @FindBy(xpath = "//div[@class='bx-finder-box-item-t7-name'][contains(text(),'77')]")
+    public WebElement contact77;
+
+    @FindBy(id = "blog-submit-button-save")
+    public WebElement submitBttn6;
+
+    /**
+     * Below, I will locate all elements for AC #
+     */
+
+    @FindBy(id = "lhe_button_editor_blogPostForm")
+    public WebElement visualEditor;
+
+    @FindBy(xpath = "/html/body")
+    public WebElement body;
+
+
 
 
 }
