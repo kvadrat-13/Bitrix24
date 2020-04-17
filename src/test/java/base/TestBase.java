@@ -1,16 +1,21 @@
 package base;
 
+import Pages.LoginPage;
+import Pages.TestPage1;
 import Utilities.BrowserUtils;
 import Utilities.ConfigurationReader;
 import Utilities.Driver;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import org.testng.asserts.SoftAssert;
+
+import javax.swing.*;
 import java.io.IOException;
 
 public abstract class TestBase {
@@ -20,6 +25,8 @@ public abstract class TestBase {
     protected ExtentReports report;
     private ExtentHtmlReporter htmlReporter;
     protected ExtentTest test;
+    protected LoginPage loginPage;
+    protected TestPage1 testPage;
 
     @BeforeSuite
     public void setUpSuite(){
@@ -42,7 +49,7 @@ public abstract class TestBase {
     @BeforeMethod
     public void setUpMethod(@Optional String url) {
         driver = Driver.getDriver();
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 20);
         softAssert = new SoftAssert();
         if (url==null){
             driver.get(ConfigurationReader.getProperty("url"));
@@ -50,6 +57,13 @@ public abstract class TestBase {
             driver.get(url);
         }
         driver.get(ConfigurationReader.getProperty("url"));
+
+        loginPage = new LoginPage();
+        testPage = new TestPage1();
+
+
+
+
 
     }
 
